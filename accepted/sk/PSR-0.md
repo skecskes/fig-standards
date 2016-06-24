@@ -46,7 +46,7 @@ Príklad Implementácie
 
 Nižšie je príklad funkcie, ktorá jednoducho demonštruje ako sa vyššie uvedený štandard samo-načítava.
 
-```php
+~~~php
 <?php
 
 function autoload($menoTriedy)
@@ -64,7 +64,7 @@ function autoload($menoTriedy)
     require $menoSuboru;
 }
 spl_autoload_register('autoload');
-```
+~~~
 
 SplClassLoader Implementácia
 ----------------------------

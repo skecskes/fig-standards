@@ -248,7 +248,7 @@ s dátami ako základné URI a potrebnými hlavičkami bez potreby vytvárať
 úplne nové požiadavky alebo zrušiť stav požiadavky pre kažú správu ktorú
 klient pošle:
 
-```php
+~~~php
 $uri = new Uri('http://api.example.com');
 $baseRequest = new Request($uri, null, [
     'Authorization' => 'Bearer ' . $token,
@@ -274,7 +274,7 @@ $response = $client->send($request)
 // Nie je potrebné prepisovať hlavičky alebo telo!
 $request = $baseRequest->withUri($uri->withPath('/tasks'))->withMethod('GET');
 $response = $client->send($request);
-```
+~~~
 
 Na strane servera budú developeri potrebovať:
 
@@ -298,17 +298,17 @@ zmeny potrebné pre používanie objektov hodnôt sú:
 
 Pre príklad v Zend Framework 2, by namiesto tohto:
 
-```php
+~~~php
 function (MvcEvent $e)
 {
     $response = $e->getResponse();
     $response->setHeaderLine('x-foo', 'bar');
 }
-```
+~~~
 
 bolo napísané radšej toto:
 
-```php
+~~~php
 function (MvcEvent $e)
 {
     $response = $e->getResponse();
@@ -316,7 +316,7 @@ function (MvcEvent $e)
         $response->withHeader('x-foo', 'bar')
     );
 }
-```
+~~~
 
 Príklad kombinuje priradenie hodnoty s notifikáciou v jedinom volaní.
 
@@ -337,7 +337,7 @@ za rovnaké, vracanie `$this` je funkčne zhodné a teda povolené.
 ### Pužívanie prúdov (tokov) namiesto X
 
 `MessageInterface` používa hodnotu teľa, ktoré musí implementovať 
-`StreamableInterface`. Toto dizajnové rozhodnutie bolo urobené preto, aby
+`StreamInterface`. Toto dizajnové rozhodnutie bolo urobené preto, aby
 vývojári mogli posielať a prijímať (a naopak) HTTP správy ktoré obsahujú oveľa 
 viac dát ako je prakticky možné uložiť do pamäti a stále mať pohodlie 
 interaktovať s telami správy ako s textovým reťazcom. Dokial PHP poskytuje
@@ -357,7 +357,7 @@ je zabehnutý
 a v [Node](http://nodejs.org/api/stream.html#stream_class_stream_transform_1)
 komunitách a povoľujú veľmi flexibilné prúdy.
 
-Väčšina `StreamableInterface` API je založená na
+Väčšina `StreamInterface` API je založená na
 [Python-ovom io module](http://docs.python.org/3.1/library/io.html), ktorý
 poskytuje praktické a konzumovateľné API. Namiesto implementovania schopností
 prúdu použitím `WritableStreamInterface` a
@@ -372,28 +372,28 @@ prúdu použitím `WritableStreamInterface` a
 V niektorých prípadoch, by Ste mohli chcieť naspäť súbor zo súborobého systému.
 Štandardne by Ste to v PHP uroblili takto:
 
-```php
+~~~php
 readfile($filename);
 
 stream_copy_to_stream(fopen($filename, 'r'), fopen('php://output', 'w'));
-```
+~~~
 
 Všimnite si, že vyššie vynechalo odosielanie správnych hlavičiek `Content-Type`
 a `Content-Length`; vývojár by ich musel vypísať pred volaním daného kódu.
 
-Porovnateľné s použitím HTTP správ by bolo cez `StreamableInterface`
+Porovnateľné s použitím HTTP správ by bolo cez `StreamInterface`
 implementáciu, ktorá akceptuje súbor a/alebo zdroj prúdu a poskytuje ho inštancii
 odpovede. Kompletný príklad, vrátane nastavenia vhodných hlavičiek:
 
-```php
-// kde stream je konkrétne StreamableInterface:
+~~~php
+// kde stream je konkrétne StreamInterface:
 $stream   = new Stream($filename);
 $finfo    = new finfo(FILEINFO_MIME);
 $response = $response
     ->withHeader('Content-Type', $finfo->file($filename))
     ->withHeader('Content-Length', (string) filesize($filename))
     ->withBody($stream);
-```
+~~~
 
 Vyslanie tejto odpovede vyšle súbor ku klientovi.
 
@@ -403,12 +403,12 @@ Priame vypísanie výstupu (napr. cez `echo`, `printf`, alebo vypísaním do
 `php://output` prúdu) je všeobecne iba odporúčané ako optimalizácia výkonu
 alebo keď vypisujeme obrovské sety dát. Ak to potrebujete spraviť a stále
 chcete použit vzor HTTP správ, jeden z postupov by bolo použitie implementácie
-založeneje na callbacku `StreamableInterface` opísaný [v tomto 
+založeneje na callbacku `StreamInterface` opísaný [v tomto 
 príklade](https://github.com/phly/psr7examples#direct-output). Zabaľ hocijaký kód
 ktorý vysiela výstup priamo do callbacku a pošli ho do správnej 
-implementácie `StreamableInterface`, a poskytni ho do tela správy:
+implementácie `StreamInterface`, a poskytni ho do tela správy:
 
-```php
+~~~php
 $output = new CallbackStream(function () use ($request) {
     printf("The requested URI was: %s<br>\n", $request->getUri());
     return '';
@@ -416,23 +416,23 @@ $output = new CallbackStream(function () use ($request) {
 return (new Response())
     ->withHeader('Content-Type', 'text/html')
     ->withBody($output);
-```
+~~~
 
 #### Čo keď chcem použiť opakovanie obsahu?
 
 Implementácia Ruby-ho Racku používa prístup založený na opakovaní pre telá
 správ odpovedí na strane servera. Toto môže byť emulované so vzorom HTTP
-správ cez prístup založený na `StreamableInterface`, ako je [popísané v
+správ cez prístup založený na `StreamInterface`, ako je [popísané v
 ropozitári psr7 príkladov](https://github.com/phly/psr7examples#iterators-and-generators).
 
 ### Prečo sú prúdy menlivé?
 
-`StreamableInterface` API zahŕňa metódy ako je `write()`, ktoré môžu meniť
+`StreamInterface` API zahŕňa metódy ako je `write()`, ktoré môžu meniť
 obsah správy -- to priamo odporuje tvrdeniu o nemenlivých správach.
 
 Problém ktorý vzniká je spôsobneý faktom že rozhranie je určené k zabaleniu
 PHP prúdu a podobne. Operácia zápisu teda zastupuje zapisovanie do prúdu. 
-Aj keď sme urobili `StreamableInterface` nemenným, inštancia ktorá zabalí prúd 
+Aj keď sme urobili `StreamInterface` nemenným, inštancia ktorá zabalí prúd 
 bude zmenená, keď zmeníme prúd -- a toto znemožní dodržanie nemeniteľnosti.
 
 Naše odporúčanie je že implementácie budú používať iba na čítanie (read-only)
@@ -487,11 +487,11 @@ hodnoty boli polia s nasledovným vysvetlením:
 Hlavným dôvodom je, že ak parametre tela sú v poli, tak vývojári vedia
 predpovedať prístup k hodnotám:
 
-```php
+~~~php
 $foo = isset($request->getBodyParams()['foo'])
     ? $request->getBodyParams()['foo']
     : null;
-```
+~~~
 
 Dôvod pre používanie "parsovaného tela" bol urobený skúmaním okruhu pôsobnosti.
 Telo správy môže doslovne obsahovať čokoľvek. Tradičné webové aplikácie
@@ -510,7 +510,7 @@ parsovania tela. Tieto môžu obsahovať:
 
 Konečný výsledok je že vývojár sa teraz musí pozrieť na viaceré miesta:
 
-```php
+~~~php
 $data = $request->getBodyParams();
 if (isset($data['__parsed__']) && is_object($data['__parsed__'])) {
     $data = $data['__parsed__'];
@@ -521,20 +521,20 @@ $data = $request->getBodyParams();
 if ($request->hasAttribute('__body__')) {
     $data = $request->getAttribute('__body__');
 }
-```
+~~~
 
 Predstavené riešenie je použiť názov "ParsedBody", ktoré nám naznačuje
 že hodnoty sú naparsované výsledky z tela správy. To tiež znamená, že
 vracajúca sa hodnota _bude_ dvojznačná; ale pretože je toto atribút rozsahu,
 tak je to aj očakávané. Použite bude asi takéto:
 
-```php
+~~~php
 $data = $request->getParsedBody();
 if (! $data instanceof \stdClass) {
     // zavolaj výnimku
 }
 // v opačnom prípade, máme čo sme chceli
-```
+~~~
 
 Tento prístup odstraňuje obmädzenia nútených polí, za cenu dvojzmyselnosti
 vrátenej hodnoty. Vzhľadom k ďaľším navrhovaným riešeniam - tlačenie parsovaných

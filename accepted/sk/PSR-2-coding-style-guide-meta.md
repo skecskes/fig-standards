@@ -29,7 +29,7 @@ funkcie sú schopné presahovať do viacerých riadkov.
 
 Nasledujúce je úplne platne v PSR-2:
 
-```php
+~~~php
 <?php
 nejakafunkcia($foo, $bar, [
   // ...
@@ -38,7 +38,7 @@ nejakafunkcia($foo, $bar, [
 $app->get('/ahoj/{name}', function ($name) use ($app) { 
     return 'Ahoj '.$app->escape($name); 
 });
-```
+~~~
 
 ### 3.2 - Rozširovanie viacero rozhraní (10/17/2013)
 

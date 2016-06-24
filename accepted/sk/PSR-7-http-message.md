@@ -19,12 +19,12 @@ prichádzajúcej požiadavky.
 
 Každá HTTP správa s požiadavkou má špecifický tvar:
 
-```http
+~~~http
 POST /path HTTP/1.1
 Host: example.com
 
 foo=bar&baz=bat
-```
+~~~
 
 Prvý riadok požiadavky je "riadok požiadavky" a obsahuje v tomto poradí, metódu
 HTTP požiadavky, cieľ požiadavky (zvyčajne buď absolútne URI alebo cesta na 
@@ -33,12 +33,12 @@ viac HTTP hlavičkami, prázdnym riadkom a teľom správy.
 
 HTTP správa s odpoveďou má podobný tvar:
 
-```http
+~~~http
 HTTP/1.1 200 OK
 Content-Type: text/plain
 
 Toto je telo odpoveďe
-```
+~~~
 
 Prvý riadok je "stavový riadok" a obsahuje v tomto poradí: verziu HTTP protokolu,
 HTTP kód stavu a "frázu dôvodu" ktorá je človekom čitateľný opis kódu stavu.
@@ -87,7 +87,7 @@ Napríklad hlavička `foo` vráti rovnaký výsledok ako hlavička `FoO`. Podobn
 nastavenie hlavičky `Foo` prepíše hocijakú predošle nastavenú hodnotu 
 hlavičky `foo`.
 
-```php
+~~~php
 $message = $message->withHeader('foo', 'bar');
 
 echo $message->getHeaderLine('foo');
@@ -99,7 +99,7 @@ echo $message->getHeaderLine('FOO');
 $message = $message->withHeader('fOO', 'baz');
 echo $message->getHeaderLine('foo');
 // Vypíše: baz
-```
+~~~
 
 Napriek tomu že hlavičky sa dajú čítať bez ohladu na veľkosť písmen, pôvodná
 veľkosť písmen MUSÍ byť zachovaná implementáciou, zvlášte keď si ju pýtame
@@ -120,7 +120,7 @@ písmen oddelené s čiarkou.
 Použite `getHeader()` na vytiahnutie pola so všetkými hodnotami hlavičiek
 pre určité meno hlavičky bez ohľadu na veľkosť písmen.
 
-```php
+~~~php
 $message = $message
     ->withHeader('foo', 'bar')
     ->withAddedHeader('foo', 'baz');
@@ -130,7 +130,7 @@ $header = $message->getHeaderLine('foo');
 
 $header = $message->getHeader('foo');
 // ['bar', 'baz']
-```
+~~~
 
 Poznámka: Nie všetky hodnoty hlavičiek môžu byť spojené s čiarkou (napr.
 `Set-Cookie` obsahuje rôzne znaky) a keď pracujeme s takými hlavičkami, kód 
@@ -252,18 +252,18 @@ Volanie tejto metódy nezmeni URI cesta, napr pri volaní metódy `getUri()`.
 
 Napríklad, ak chce užívateľ urobiť požiadavku na server v hviezdičkovom tvare:
 
-```php
+~~~php
 $request = $request
     ->withMethod('OPTIONS')
     ->withRequestTarget('*')
     ->withUri(new Uri('https://example.org/'));
-```
+~~~
 
 Výsledkom tohto príkladu môže nakoniec byť HTTP požiadavka ktorá vyzerá takto:
 
-```http
+~~~http
 OPTIONS * HTTP/1.1
-```
+~~~
 
 HTTP klient bude schopný použiť efektívnu cestu (z `getUri()`),
 aby zistil protokol, meno hostiteľa a TCP port.
@@ -327,7 +327,7 @@ Superglobálna premenná `$_FILES` má určité známe problémy keď pracuje s 
 vstupných s´uborov. Ako príklad, ak máte formulár, ktorý odošle pole súborov, 
 názov poľa "files", odosielajúce `files[0]` a `files[1]` — PHP ich znázorní:
 
-```php
+~~~php
 array(
     'files' => array(
         'name' => array(
@@ -341,11 +341,11 @@ array(
         /* etc. */
     ),
 )
-```
+~~~
 
 namiesto očakávaného:
 
-```php
+~~~php
 array(
     'files' => array(
         0 => array(
@@ -360,7 +360,7 @@ array(
         ),
     ),
 )
-```
+~~~
 
 Výsledkom je, že užívatelia potrebujú poznať detaily implementácie jazyka
 a naprogramovať kód, ktorý správne nahrá dané súbory.
@@ -393,13 +393,13 @@ odoslané.
 
 V najjednoduchšom príklade, toto môže byť jednoducho nazvaný element formulára:
 
-```html
+~~~html
 <input type="file" name="avatar" />
-```
+~~~
 
 V tomto prípade štruktúra v `$_FILES` by vyzerala takto:
 
-```php
+~~~php
 array(
     'avatar' => array(
         'tmp_name' => 'phpUxcOty',
@@ -409,25 +409,25 @@ array(
         'error' => 0,
     ),
 )
-```
+~~~
 
 Normalizovaný formulár vrátený cez `getUploadedFiles()` by bol:
 
-```php
+~~~php
 array(
     'avatar' => /* inštancia UploadedFileInterface */
 )
-```
+~~~
 
 V prípade vstupu používajúce pomenované polia:
 
-```html
+~~~html
 <input type="file" name="my-form[details][avatar]" />
-```
+~~~
 
 `$_FILES` by vyzeralo takto:
 
-```php
+~~~php
 array(
     'my-form' => array(
         'details' => array(
@@ -441,11 +441,11 @@ array(
         ),
     ),
 )
-```
+~~~
 
 A korenšpondujúci strom vrátený s `getUploadedFiles()` by bol:
 
-```php
+~~~php
 array(
     'my-form' => array(
         'details' => array(
@@ -453,14 +453,14 @@ array(
         ),
     ),
 )
-```
+~~~
 
 V niektorých prípadoch môžete špecifikovať pole súborob:
 
-```html
+~~~html
 Upload an avatar: <input type="file" name="my-form[details][avatars][]" />
 Upload an avatar: <input type="file" name="my-form[details][avatars][]" />
-```
+~~~
 
 (Ako príklad, JavaScript môže vytvoriť viacej vstupných polí pre nahratie
 viacerých súborov naraz.)
@@ -469,7 +469,7 @@ V takom prípade, implementácia špecifikácie musí zhrnúť všetky informác
 ohľadne súboru v danom indexe. Príčinou je `$_FILES` ktorý sa odchyľuje
 od svojej normálnej štruktúry v takých prípadoch:
 
-```php
+~~~php
 array(
     'my-form' => array(
         'details' => array(
@@ -503,12 +503,12 @@ array(
         ),
     ),
 )
-```
+~~~
 
 Vyššie pole `$_FILES` by korešpondovalo s nasledujúcou štruktúrou vrátenou
 metódou `getUploadedFiles()`:
 
-```php
+~~~php
 array(
     'my-form' => array(
         'details' => array(
@@ -520,13 +520,13 @@ array(
         ),
     ),
 )
-```
+~~~
 
 Užívatelia by pristupovali do vnoreného poľa k indexu `1` takto:
 
-```php
+~~~php
 $request->getUploadedFiles()['my-form']['details']['avatars'][1];
-```
+~~~
 
 Pretože nahraté dáta súborov sú odvodené (z `$_FILES` alebo tela požiadavky),
 rozhranie obsahuje aj "setter" metódu `withUploadedFiles()` ktoré dovoľuje
@@ -534,7 +534,7 @@ prenesenie normalizáciena iný proces.
 
 V prípade pôvodného príkladu, sa použitie podobá na toto:
 
-```php
+~~~php
 $file0 = $request->getUploadedFiles()['files'][0];
 $file1 = $request->getUploadedFiles()['files'][1];
 
@@ -545,7 +545,7 @@ printf(
 );
 
 // "Prijali sa súbory file0.txt a file1.html"
-```
+~~~
 
 Toto riešenie tiež počíta s implementáciami mimo SAPI prostredia a v takých
 prípadoch poskytuje `UploadedFileInterface` metódy na zaistenie, že operácie
@@ -562,7 +562,7 @@ budú pracovať nezávisle na prostredí. Špecificky:
 
 Príklad:
 
-```
+~~~
 // Presuň súbor do upload adresára
 $filename = sprintf(
     '%s.%s',
@@ -577,7 +577,7 @@ $file0->moveTo(DATA_DIR . '/' . $filename);
 // StreamWrapper.
 $stream = new Psr7StreamWrapper($file1->getStream());
 stream_copy_to_stream($stream, $s3wrapper);
-```
+~~~
 
 ## 2. Balík
 
@@ -588,7 +588,7 @@ Opísané rozhrania a triedy sú poskytnuté ako časť balíka
 
 ### 3.1 `Psr\Http\Message\MessageInterface`
 
-```php
+~~~php
 <?php
 namespace Psr\Http\Message;
 
@@ -774,11 +774,11 @@ interface MessageInterface
      */
     public function withBody(StreamInterface $body);
 }
-```
+~~~
 
 ### 3.2 `Psr\Http\Message\RequestInterface`
 
-```php
+~~~php
 <?php
 namespace Psr\Http\Message;
 
@@ -907,11 +907,11 @@ interface RequestInterface extends MessageInterface
      */
     public function withUri(UriInterface $uri, $preserveHost = false);
 }
-```
+~~~
 
 #### 3.2.1 `Psr\Http\Message\ServerRequestInterface`
 
-```php
+~~~php
 <?php
 namespace Psr\Http\Message;
 
@@ -1172,11 +1172,11 @@ interface ServerRequestInterface extends RequestInterface
      */
     public function withoutAttribute($name);
 }
-```
+~~~
 
 ### 3.3 `Psr\Http\Message\ResponseInterface`
 
-```php
+~~~php
 <?php
 namespace Psr\Http\Message;
 
@@ -1244,11 +1244,11 @@ interface ResponseInterface extends MessageInterface
      */
     public function getReasonPhrase();
 }
-```
+~~~
 
 ### 3.4 `Psr\Http\Message\StreamInterface`
 
-```php
+~~~php
 <?php
 namespace Psr\Http\Message;
 
@@ -1406,11 +1406,11 @@ interface StreamInterface
      */
     public function getMetadata($key = null);
 }
-```
+~~~
 
 ### 3.5 `Psr\Http\Message\UriInterface`
 
-```php
+~~~php
 <?php
 namespace Psr\Http\Message;
 
@@ -1735,11 +1735,11 @@ interface UriInterface
      */
     public function __toString();
 }
-```
+~~~
 
 ### 3.6 `Psr\Http\Message\UploadedFileInterface`
 
-```php
+~~~php
 <?php
 namespace Psr\Http\Message;
 
@@ -1862,4 +1862,4 @@ interface UploadedFileInterface
      */
     public function getClientMediaType();
 }
-```
+~~~

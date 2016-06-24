@@ -55,7 +55,7 @@ ako opísané v [RFC 2119].
 
 Tento príklad zahŕňa niektoré pravidlá nižšie pre rýchly prehľad:
 
-```php
+~~~php
 <?php
 namespace Vendor\Package;
 
@@ -81,7 +81,7 @@ class Foo extends Bar implements FooInterface
         // telo metódy
     }
 }
-```
+~~~
 
 2. Všeobecne
 ------------
@@ -147,7 +147,7 @@ Po bloku `use` deklarácií MUSÍ nasledovať jeden prázdny riadok.
 
 Napríklad:
 
-```php
+~~~php
 <?php
 namespace Vendor\Package;
 
@@ -157,7 +157,7 @@ use OtherVendor\OtherPackage\BazClass;
 
 // ... ďaľší PHP kód ...
 
-```
+~~~
 
 
 4. Triedy, Vlastnosti a Metódy
@@ -173,7 +173,7 @@ na rovnakom riadku ako meno triedy.
 Otvárajúca hranatá zátvorka pre triedu MUSÍ ísť na svôj vlastný riadok; zatvárajúca 
 hranatá zátvorka pre triedu MUSÍ ísť na ďaľší riadok za telom triedy.
 
-```php
+~~~php
 <?php
 namespace Vendor\Package;
 
@@ -185,14 +185,14 @@ class MenoTriedy extends ParentClass implements \ArrayAccess, \Countable
 {
     // konštanty, vlastnosti, metódy
 }
-```
+~~~
 
 Zoznam implementacií `implements` MôŽE byť rozdelený na viacerých riadkoch,
 pričom každý ďaľší riadok je odsadený raz. Keď použijete tento spôsob,
 tak prvá položka implementácie v zozname MUSÍ byť na ďaľšom riadkua MUSÍ
 byť definované po jednom rozhraní na jeden riadok.
 
-```php
+~~~php
 <?php
 namespace Vendor\Package;
 
@@ -207,7 +207,7 @@ class MenoTriedy extends RodicovskaTrieda implements
 {
     // konštanty, vlastnosti, metódy
 }
-```
+~~~
 
 ### 4.2. Vlastnosti
 
@@ -222,7 +222,7 @@ Mená vlastností BY NEMALI mať predponu s jedným podtržítkom na naznačenie
 
 Deklarácia vlastnosti vypadá napríklad nasledovne:
 
-```php
+~~~php
 <?php
 namespace Vendor\Package;
 
@@ -230,7 +230,7 @@ class MenoTriedy
 {
     public $vlastnost = null;
 }
-```
+~~~
 
 ### 4.3. Metódy
 
@@ -248,7 +248,7 @@ NESMIE byť medzera a tiež medzera NESMIE byť pred zatvárajúcou obyčajnou z
 Deklarácoa metódy vypadá nasledobne. Všimnite si umiestnenie zátvoriek, 
 čiariek, medzier a hranatých zátvoriek:
 
-```php
+~~~php
 <?php
 namespace Vendor\Package;
 
@@ -259,7 +259,7 @@ class MenoTriedy
         // telo metódy
     }
 }
-```    
+~~~    
 
 ### 4.4. Parametre Metódy
 
@@ -269,7 +269,7 @@ MUSÍ mať jednu medzeru za sebou.
 Parametre metódy s predvolenmi hodnotami MUSIA ísť na koniec zoznamu 
 parametrov.
 
-```php
+~~~php
 <?php
 namespace Vendor\Package;
 
@@ -280,7 +280,7 @@ class MenoTriedy
         // telo metódy
     }
 }
-```
+~~~
 
 Zoznam parametrov MôŽE byť rozdelený na viacerých riadkoch, kde každý ďaľší
 riadok je odsadený raz. Keď robíte tak, prvá položka na zozname MUSÍ byť
@@ -290,7 +290,7 @@ Keď je zoznam parametrov rozdelený na viacerých riadkoch, zatvárajúca
 zátvorka `)` a otvárajúca hranatá zátvorka `}` musia byť spolu na jednom
 vlastnom riadku s jednou medzerou medzi nimi.
 
-```php
+~~~php
 <?php
 namespace Vendor\Package;
 
@@ -304,7 +304,7 @@ class MenoTriedy
         // telo metódy
     }
 }
-```
+~~~
 
 ### 4.5. `abstract`, `final`, a `static`
 
@@ -314,7 +314,7 @@ deklaráciu visibility.
 Keď je prítomná deklarácia `static`, tak MUSÍ byť za deklaráciou 
 visibility.
 
-```php
+~~~php
 <?php
 namespace Vendor\Package;
 
@@ -329,7 +329,7 @@ abstract class MenoTriedy
         // telo metódy
     }
 }
-```
+~~~
 
 ### 4.6. Volania metod a funkcií
 
@@ -340,25 +340,25 @@ Keď voláme metódu alebo funkciu tak:
 - v zozname parametrov NESMIE byt medzera pred čiarkou a MUSÍ byť 
   jedna medzera za každou čiarkou. 
 
-```php
+~~~php
 <?php
 bar();
 $foo->bar($arg1);
 Foo::bar($arg2, $arg3);
-```
+~~~
 
 Zoznam parametrov MôŽE byť rozdelený na viacero riadkov, kde každý 
 ďaľší riadok je odsadený raz. V takom prípade, prvá položka v zozname 
 MUSÍ byt na ďaľšom riadku a každý parameter MUSÍ byt na vlastnom riadku
 
-```php
+~~~php
 <?php
 $foo->bar(
     $longArgument,
     $longerArgument,
     $muchLongerArgument
 );
-```
+~~~
 
 5. Riadiace štruktúry
 ---------------------
@@ -384,7 +384,7 @@ keď sa nové riadky pridajú do tela.
 hranatých zátvoriek; a tiež že `else` a `elseif` sú na rovnakom riadku 
 ako zatvárajúce hranaté zátvorky predošlého tela.
 
-```php
+~~~php
 <?php
 if ($expr1) {
     // tela pre if
@@ -393,7 +393,7 @@ if ($expr1) {
 } else {
     // telo pre else;
 }
-```
+~~~
 
 Klúčové slovo `elseif` BY MALO byť použité namiesto `else if`, 
 takže riadiace klúčové slovo vyzerá ako jedno slovo.
@@ -408,7 +408,7 @@ MUSIA byť odsadené na rovnakej úrovni ako telo `case`. Ak telo `case`
 nie je prázdne a zámerne nemá `break`, tak MUSÍ obsahovať komment
 ako `// no break`.
 
-```php
+~~~php
 <?php
 switch ($vyraz) {
     case 0:
@@ -426,7 +426,7 @@ switch ($vyraz) {
         echo 'Štandardný prípad';
         break;
 }
-```
+~~~
 
 
 ### 5.3. `while`, `do while`
@@ -434,53 +434,53 @@ switch ($vyraz) {
 Kľúčové slovo `while` vypadá nasledovne. Všimnite si
 umiestnenie zátvoriek, medzier a hranatých zátvoriek.
 
-```php
+~~~php
 <?php
 while ($vyraz) {
     // telo štruktúry
 }
-```
+~~~
 
 Podobne, štruktúra `do while` vypadá nasledovne. Všimnite si umiestnenie
 zátvoriek, medzier a hranatých zátvoriek.
 
-```php
+~~~php
 <?php
 do {
     // telo štruktúry;
 } while ($vyraz);
-```
+~~~
 
 ### 5.4. `for`
 
 Povel `for` vypadá nasledovne. Všimnite si umiestnenie
 zátvoriek, medzier a hranatých zátvoriek.
 
-```php
+~~~php
 <?php
 for ($i = 0; $i < 10; $i++) {
     // telo
 }
-```
+~~~
 
 ### 5.5. `foreach`
     
 Povel `foreach` vyzerá nasledovne. Všimnite si umiestnenie
 zátvoriek, medzier a hranatých zátvoriek.
 
-```php
+~~~php
 <?php
 foreach ($iterable as $key => $value) {
     // telo foreach
 }
-```
+~~~
 
 ### 5.6. `try`, `catch`
 
 BLok `try catch` vyzerá nasledovne. Všimnite si umiestnenie
 zátvoriek, medzier a hranatých zátvoriek.
 
-```php
+~~~php
 <?php
 try {
     // telo try
@@ -489,7 +489,7 @@ try {
 } catch (OtherExceptionType $e) {
     // telo catch
 }
-```
+~~~
 
 6. Uzavretia `Closures`
 -----------------------
@@ -513,7 +513,7 @@ zoznamu parametrov.
 Deklarácia Uzavretia vypadá nasledovne.Všimnite si umiestnenie
 zátvoriek, medzier, čiarok a hranatých zátvoriek.
 
-```php
+~~~php
 <?php
 $uzavretieSArgumentami = function ($arg1, $arg2) {
     // telo
@@ -522,7 +522,7 @@ $uzavretieSArgumentami = function ($arg1, $arg2) {
 $uzavretieSArgumentamiAPremennymi = function ($arg1, $arg2) use ($var1, $var2) {
     // telo
 };
-```
+~~~
 
 Zoznam parametrov a premenných MOŽE byť rozdelený na viacero riadkov, kde 
 každý ďaľší riadok je odsadený raz. V takomto prípade, prvá položka na zozname
@@ -536,7 +536,7 @@ zátvorka umiestnená spolu na jednom riadku s jednou medzerou medzi nimi.
 Nasledujúce príklady uzavretí s alebo bez zoznamu argumentov a premenných
 rozdelených na viacero riadkov:
 
-```php
+~~~php
 <?php
 $longArgs_noVars = function (
     $longArgument,
@@ -581,12 +581,12 @@ $shortArgs_longVars = function ($arg) use (
 ) {
    // telo
 };
-```
+~~~
 
 Všimnite si že pravidlá formátovania tiež platia keď je uzavretie
 použité priamo vo volaní funkcie alebo metódy ako parameter:
 
-```php
+~~~php
 <?php
 $foo->bar(
     $arg1,
@@ -595,7 +595,7 @@ $foo->bar(
     },
     $arg3
 );
-```
+~~~
 
 
 7. Záver

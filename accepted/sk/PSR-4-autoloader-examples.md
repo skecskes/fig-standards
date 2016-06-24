@@ -6,7 +6,7 @@ Nasledujúce príklady znázorňujú kódy vyhovujúce štandardu PSR-4:
 Príklad Uzávierky (Closure)
 ---------------------------
 
-```php
+~~~php
 <?php
 /**
  * Príklad implementácie špecifickej pre projekt.
@@ -49,14 +49,14 @@ spl_autoload_register(function ($class) {
         require $file;
     }
 });
-```
+~~~
 
 Príklad triedy
 --------------
 
 Nasledujúci príklad implementuje prácu s mnohými mennými priestormi:
 
-```php
+~~~php
 <?php
 namespace Example;
 
@@ -243,14 +243,14 @@ class Psr4AutoloaderClass
         return false;
     }
 }
-```
+~~~
 
 ### Jednotkové testovanie
 
 Nasledujúci príklad je jedna z možností ako testovať 
 vyššie uvedený načítávač tried:
 
-```php
+~~~php
 <?php
 namespace Example\Tests;
 
@@ -347,3 +347,5 @@ class Psr4AutoloaderClassTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expect, $actual);
     }
 }
+~~~
+

@@ -63,7 +63,7 @@ ohlasovanie chýb a výnimiek, upravovanie globálnych alebo statických premenn
 Nasledujúce je príklad súboru s obidvomi deklaráciami a vedľajšími efektami, 
 to znamená príklad čomu sa vyvarovať:
 
-```php
+~~~php
 <?php
 // vedľajší efekt: zmena ini nastavenia
 ini_set('error_reporting', E_ALL);
@@ -79,12 +79,12 @@ function foo()
 {
     // function body
 }
-```
+~~~
 
 Nasledujúci je príklad súboru, ktorý obsahuje deklarácie bez vedľajších efektov;
 to znamená, príklad čoho sa držať:
 
-```php
+~~~php
 <?php
 // deklarácia
 function foo()
@@ -99,7 +99,7 @@ if (! function_exists('bar')) {
         // telo funkcie
     }
 }
-```
+~~~
 
 
 3. Menný priestor a mená tried 
@@ -116,7 +116,7 @@ Kód napísaný pre PHP 5.3 a vyšší MUSI používať formálne menné priesto
 
 Napríklad:
 
-```php
+~~~php
 <?php
 // PHP 5.3 a vyššie:
 namespace Vendor\Model;
@@ -124,18 +124,18 @@ namespace Vendor\Model;
 class Foo
 {
 }
-```
+~~~
 
 Kód napísaný pre 5.2.x a nižšie BY MAL používať dohodnuté pseudo-menné priestory
 s predponou `Vendor_` v mene triedy.
 
-```php
+~~~php
 <?php
 // PHP 5.2.x a nižšie:
 class Vendor_Model_Foo
 {
 }
-```
+~~~
 
 4. Konštanty, vlastnosti a metódy triéd
 ---------------------------------------
@@ -147,7 +147,7 @@ Pojmom "trieda" máme na mysli všetky triedy, rozhrania a traits.
 Konštanty triéd MUSIA byť deklarované iba s veľkými písmenami a podtržníkovými oddelovačmi..
 Napríklad:
 
-```php
+~~~php
 <?php
 namespace Vendor\Model;
 
@@ -156,7 +156,7 @@ class Foo
     const VERSION = '1.0';
     const DATE_APPROVED = '2012-06-01';
 }
-```
+~~~
 
 ### 4.2. Vlastnosti
 

@@ -67,7 +67,7 @@ Užívatelia zápisníkov sú označovaný ako `užívatelia`.
   Nasleduje príklad implementácie nahradenia zástupnych symbolov ukazujúca
   odporúčaný spôsob:
 
-  ```php
+  ~~~php
   /**
    * Nahradzuje zástupné symboly v správe kontextovými hodnotami.
    */
@@ -91,7 +91,7 @@ Užívatelia zápisníkov sú označovaný ako `užívatelia`.
 
   // vypíše "Užívateľ Štefan vytvorený"
   echo nahrad($message, $context);
-  ```
+  ~~~
 
 ### 1.3 Kontext
 
@@ -143,7 +143,7 @@ na otestovanie implementacie je poskytnutá ako súčat balíka
 3. `Psr\Log\LoggerInterface`
 ----------------------------
 
-```php
+~~~php
 <?php
 
 namespace Psr\Log;
@@ -257,12 +257,12 @@ interface LoggerInterface
      */
     public function log($level, $message, array $context = array());
 }
-```
+~~~
 
 4. `Psr\Log\LoggerAwareInterface`
 ---------------------------------
 
-```php
+~~~php
 <?php
 
 namespace Psr\Log;
@@ -280,12 +280,12 @@ interface LoggerAwareInterface
      */
     public function setLogger(LoggerInterface $logger);
 }
-```
+~~~
 
 5. `Psr\Log\LogLevel`
 ---------------------
 
-```php
+~~~php
 <?php
 
 namespace Psr\Log;
@@ -304,4 +304,4 @@ class LogLevel
     const INFO      = 'info';
     const DEBUG     = 'debug';
 }
-```
+~~~
